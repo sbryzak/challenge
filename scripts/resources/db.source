@@ -1,65 +1,63 @@
 DROP TABLE IF EXISTS `Buzzword`;
+DROP TABLE IF EXISTS `Poll`;
+DROP TABLE IF EXISTS `History`;
+DROP TABLE IF EXISTS `Statistic`;
+DROP TABLE IF EXISTS `URL`;
+DROP TABLE IF EXISTS `User`;
+
+
+
+
 CREATE TABLE `Buzzword` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `buzzword` varchar(255) DEFAULT NULL,
   `exclude` tinyint(1) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_6p95i69tu6xcrmsytpij8xjax` (`user_id`),
-  CONSTRAINT `FK_6p95i69tu6xcrmsytpij8xjax` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
+  KEY  (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
-
-DROP TABLE IF EXISTS `History`;
-CREATE TABLE `History` (
-  `id` bigint(20) NOT NULL,
+CREATE TABLE `Poll` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `timeStamp` date DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `url_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_ocp5gufgqif8tcldplg9rmvgm` (`url_id`),
-  CONSTRAINT `FK_ocp5gufgqif8tcldplg9rmvgm` FOREIGN KEY (`url_id`) REFERENCES `URL` (`id`)
+  KEY (`url_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Statistic`;
 CREATE TABLE `Statistic` (
-  `id` bigint(20) NOT NULL,
-  `buzzword` varchar(255) DEFAULT NULL,
-  `density` int(11) DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `buzzword_id` bigint(20) DEFAULT NULL,
   `frequency` int(11) DEFAULT NULL,
-  `instanceCount` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
-  `history_id` bigint(20) DEFAULT NULL,
+  `poll_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_e11lr56ev5qirvgpor5pg3pe2` (`history_id`),
-  CONSTRAINT `FK_e11lr56ev5qirvgpor5pg3pe2` FOREIGN KEY (`history_id`) REFERENCES `History` (`id`)
+  KEY (`poll_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `URL`;
 CREATE TABLE `URL` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_b78et76pv1h5dwu8bviwvbaww` (`user_id`),
-  CONSTRAINT `FK_b78et76pv1h5dwu8bviwvbaww` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
+  KEY  (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 
 
 
-DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
+  `pollfrequency` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
