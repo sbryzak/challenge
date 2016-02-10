@@ -34,7 +34,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.cdi.ContextName;
 
 @SuppressWarnings("serial")
-@WebServlet(name = "HttpServiceServlet", urlPatterns = { "/camel/*" }, loadOnStartup = 1)
+@WebServlet(name = "HttpServiceServlet", urlPatterns = { "/*" }, loadOnStartup = 1)
 public class SimpleServlet extends HttpServlet
 {
 	@Inject
