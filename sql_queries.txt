@@ -1,0 +1,8 @@
+List user buzzwords:
+
+select u.id, u.email, b.buzzword, b.exclude from User u inner join Buzzword b on u.id = b.user_id;
+
+List user URLs:
+
+select u.id, u.email, url.url from User u inner join URL url on u.id = url.user_id;
+
