@@ -1,13 +1,18 @@
 package org.sample.team.orange;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.orange.crud.model.Buzzword;
+import org.jboss.orange.crud.model.Poll;
+import org.jboss.orange.crud.model.Statistic;
+import org.jboss.orange.crud.model.URL;
 import org.jboss.orange.crud.model.User;
 import org.sample.team.orange.model.BuzzWord;
 import org.sample.team.orange.model.UserParams;
@@ -60,6 +65,31 @@ public class Queries {
         p.setUrls(urls);
         
         return p;
+    }
+    
+    public URL lookupUrl(String email, String url) {
+        return em.createQuery("select u from URL u where u.user = :user and u.url = :url", URL.class)
+                .setParameter("user",  lookupUserByEmail(email))
+                .setParameter("url", url)
+                .getSingleResult();
+    }
+    
+    public void createPoll(String email, String url, Map<String,Integer> statistics) {
+        Poll poll = new Poll();
+        poll.setUrl(lookupUrl(email, url));
+        poll.setTimeStamp(new Date());
+        em.persist(poll);
+        
+        for (String buzzword : statistics.keySet()) {
+            Statistic stat = new Statistic();
+            
+            stat.setPoll(poll);
+            stat.setBuzzword(buzzword);
+            stat.setFrequency(statistics.get(buzzword));
+            
+            em.persist(stat);
+        }
+        
     }
 }
  
