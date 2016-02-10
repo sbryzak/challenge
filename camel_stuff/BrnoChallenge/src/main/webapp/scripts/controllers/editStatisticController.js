@@ -1,6 +1,6 @@
 
 
-angular.module('orangecrud').controller('EditStatisticController', function($scope, $routeParams, $location, flash, StatisticResource , HistoryResource) {
+angular.module('orangecrud').controller('EditStatisticController', function($scope, $routeParams, $location, flash, StatisticResource , PollResource) {
     var self = this;
     $scope.disabled = false;
     $scope.$location = $location;
@@ -9,8 +9,8 @@ angular.module('orangecrud').controller('EditStatisticController', function($sco
         var successCallback = function(data){
             self.original = data;
             $scope.statistic = new StatisticResource(self.original);
-            HistoryResource.queryAll(function(items) {
-                $scope.historySelectionList = $.map(items, function(item) {
+            PollResource.queryAll(function(items) {
+                $scope.pollSelectionList = $.map(items, function(item) {
                     var wrappedObject = {
                         id : item.id
                     };
@@ -18,10 +18,10 @@ angular.module('orangecrud').controller('EditStatisticController', function($sco
                         value : item.id,
                         text : item.id
                     };
-                    if($scope.statistic.history && item.id == $scope.statistic.history.id) {
-                        $scope.historySelection = labelObject;
-                        $scope.statistic.history = wrappedObject;
-                        self.original.history = $scope.statistic.history;
+                    if($scope.statistic.poll && item.id == $scope.statistic.poll.id) {
+                        $scope.pollSelection = labelObject;
+                        $scope.statistic.poll = wrappedObject;
+                        self.original.poll = $scope.statistic.poll;
                     }
                     return labelObject;
                 });
@@ -72,10 +72,10 @@ angular.module('orangecrud').controller('EditStatisticController', function($sco
         $scope.statistic.$remove(successCallback, errorCallback);
     };
     
-    $scope.$watch("historySelection", function(selection) {
+    $scope.$watch("pollSelection", function(selection) {
         if (typeof selection != 'undefined') {
-            $scope.statistic.history = {};
-            $scope.statistic.history.id = selection.value;
+            $scope.statistic.poll = {};
+            $scope.statistic.poll.id = selection.value;
         }
     });
     

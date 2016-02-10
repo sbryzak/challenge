@@ -1,6 +1,6 @@
 
 
-angular.module('orangecrud').controller('SearchStatisticController', function($scope, $http, $filter, StatisticResource , HistoryResource) {
+angular.module('orangecrud').controller('SearchStatisticController', function($scope, $http, $filter, StatisticResource , PollResource) {
 
     $scope.search={};
     $scope.currentPage = 0;
@@ -17,7 +17,7 @@ angular.module('orangecrud').controller('SearchStatisticController', function($s
         }
         return max;
     };
-    $scope.historyList = HistoryResource.queryAll();
+    $scope.pollList = PollResource.queryAll();
 
     $scope.performSearch = function() {
         $scope.searchResults = StatisticResource.queryAll(function(){

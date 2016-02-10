@@ -1,21 +1,21 @@
 
-angular.module('orangecrud').controller('NewStatisticController', function ($scope, $location, locationParser, flash, StatisticResource , HistoryResource) {
+angular.module('orangecrud').controller('NewStatisticController', function ($scope, $location, locationParser, flash, StatisticResource , PollResource) {
     $scope.disabled = false;
     $scope.$location = $location;
     $scope.statistic = $scope.statistic || {};
     
-    $scope.historyList = HistoryResource.queryAll(function(items){
-        $scope.historySelectionList = $.map(items, function(item) {
+    $scope.pollList = PollResource.queryAll(function(items){
+        $scope.pollSelectionList = $.map(items, function(item) {
             return ( {
                 value : item.id,
                 text : item.id
             });
         });
     });
-    $scope.$watch("historySelection", function(selection) {
+    $scope.$watch("pollSelection", function(selection) {
         if ( typeof selection != 'undefined') {
-            $scope.statistic.history = {};
-            $scope.statistic.history.id = selection.value;
+            $scope.statistic.poll = {};
+            $scope.statistic.poll.id = selection.value;
         }
     });
     

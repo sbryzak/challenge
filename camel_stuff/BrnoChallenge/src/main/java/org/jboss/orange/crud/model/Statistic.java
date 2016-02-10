@@ -7,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
-import org.jboss.orange.crud.model.History;
+import org.jboss.orange.crud.model.Poll;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 @Entity
+@XmlRootElement
 public class Statistic implements Serializable {
 
 	@Id
@@ -24,16 +26,10 @@ public class Statistic implements Serializable {
 	private String buzzword;
 
 	@Column
-	private int instanceCount;
-
-	@Column
 	private int frequency;
 
-	@Column
-	private int density;
-
 	@ManyToOne
-	private History history;
+	private Poll poll;
 
 	public Long getId() {
 		return this.id;
@@ -84,14 +80,6 @@ public class Statistic implements Serializable {
 		this.buzzword = buzzword;
 	}
 
-	public int getInstanceCount() {
-		return instanceCount;
-	}
-
-	public void setInstanceCount(int instanceCount) {
-		this.instanceCount = instanceCount;
-	}
-
 	public int getFrequency() {
 		return frequency;
 	}
@@ -100,30 +88,20 @@ public class Statistic implements Serializable {
 		this.frequency = frequency;
 	}
 
-	public int getDensity() {
-		return density;
-	}
-
-	public void setDensity(int density) {
-		this.density = density;
-	}
-
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
 		if (buzzword != null && !buzzword.trim().isEmpty())
 			result += "buzzword: " + buzzword;
-		result += ", instanceCount: " + instanceCount;
 		result += ", frequency: " + frequency;
-		result += ", density: " + density;
 		return result;
 	}
 
-	public History getHistory() {
-		return this.history;
+	public Poll getPoll() {
+		return this.poll;
 	}
 
-	public void setHistory(final History history) {
-		this.history = history;
+	public void setPoll(final Poll poll) {
+		this.poll = poll;
 	}
 }

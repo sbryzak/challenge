@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
 @Entity
+@XmlRootElement
 public class User implements Serializable {
 
 	@Id
@@ -20,6 +22,9 @@ public class User implements Serializable {
 
 	@Column
 	private String email;
+
+	@Column
+	private int pollfrequency;
 
 	public Long getId() {
 		return this.id;
@@ -70,11 +75,20 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public int getPollfrequency() {
+		return pollfrequency;
+	}
+
+	public void setPollfrequency(int pollfrequency) {
+		this.pollfrequency = pollfrequency;
+	}
+
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
 		if (email != null && !email.trim().isEmpty())
 			result += "email: " + email;
+		result += ", pollfrequency: " + pollfrequency;
 		return result;
 	}
 }

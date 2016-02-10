@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import org.jboss.orange.crud.model.URL;
 import javax.persistence.ManyToOne;
 @Entity
-public class History implements Serializable {
+public class Poll implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,10 +51,10 @@ public class History implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof History)) {
+		if (!(obj instanceof Poll)) {
 			return false;
 		}
-		History other = (History) obj;
+		Poll other = (Poll) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;

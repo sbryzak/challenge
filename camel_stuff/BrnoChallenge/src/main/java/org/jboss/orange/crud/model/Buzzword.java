@@ -9,7 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Version;
 import org.jboss.orange.crud.model.User;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 @Entity
+@XmlRootElement
 public class Buzzword implements Serializable {
 
 	@Id

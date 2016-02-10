@@ -12,14 +12,6 @@
         </div>
     </div>
 
-    <div class="form-group" ng-class="{'has-error': StatisticForm.instanceCount.$invalid}">
-        <label for="instanceCount" class="col-sm-2 control-label">Instance Count</label>
-        <div id="instanceCountControls" class="col-sm-10">
-            <input id="instanceCount" name="instanceCount" type="number" class="form-control" ng-model="statistic.instanceCount" placeholder="Enter the Statistic Instance Count"></input>
-            <span class="help-block error" ng-show="StatisticForm.instanceCount.$error.number">not a number</span>
-        </div>
-    </div>
-
     <div class="form-group" ng-class="{'has-error': StatisticForm.frequency.$invalid}">
         <label for="frequency" class="col-sm-2 control-label">Frequency</label>
         <div id="frequencyControls" class="col-sm-10">
@@ -28,19 +20,11 @@
         </div>
     </div>
 
-    <div class="form-group" ng-class="{'has-error': StatisticForm.density.$invalid}">
-        <label for="density" class="col-sm-2 control-label">Density</label>
-        <div id="densityControls" class="col-sm-10">
-            <input id="density" name="density" type="number" class="form-control" ng-model="statistic.density" placeholder="Enter the Statistic Density"></input>
-            <span class="help-block error" ng-show="StatisticForm.density.$error.number">not a number</span>
-        </div>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': StatisticForm.history.$invalid}">
-        <label for="history" class="col-sm-2 control-label">History</label>
-        <div id="historyControls" class="col-sm-10">
-        <select id="history" name="history" class="form-control" ng-model="historySelection" ng-options="h.text for h in historySelectionList"  >
-            <option value="">Choose a History</option>
+    <div class="form-group" ng-class="{'has-error': StatisticForm.poll.$invalid}">
+        <label for="poll" class="col-sm-2 control-label">Poll</label>
+        <div id="pollControls" class="col-sm-10">
+        <select id="poll" name="poll" class="form-control" ng-model="pollSelection" ng-options="p.text for p in pollSelectionList"  >
+            <option value="">Choose a Poll</option>
         </select>
         </div>
     </div>
