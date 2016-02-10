@@ -41,6 +41,11 @@ import javax.enterprise.context.ApplicationScoped;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.cdi.ContextName;
 
+import org.apache.camel.Processor;
+import org.apache.camel.Exchange;
+
+import org.sample.team.orange.FakeUserParamsFactory;
+
 @Startup
 @ApplicationScoped
 @ContextName("cdi-context")
@@ -48,10 +53,14 @@ public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-    	//from("direct:start").beanRef("helloBean");
-    	from("timer://foo?fixedRate=true&period=5000")
-  	  	.to("http://developers.redhat.com")
-  	  	.process(new BuzzWordFilter())
-  	  	.log("Hey ${body}");
+    	from("timer://foo?fixedRate=true&period=10000")
+    	.process(new FakeUserParamsFactory())
+    	.to("direct:urlreadroute");
+    	
+    	from("direct:urlreadroute").routeId("urlreadroute")
+    	.log("URL, COUNT, BUZZWORD ${header.url} ${header.count} ${header.buzzword}")
+    	.recipientList(simple("${header.url}"))
+    	.process(new BuzzWordFilter("${header.buzzword}"))	
+    	.log("### ${header.url} has word ${header.buzzword} ${header.count} times ###");
     }
 }
