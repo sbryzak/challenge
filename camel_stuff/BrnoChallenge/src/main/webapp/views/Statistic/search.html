@@ -1,0 +1,96 @@
+<div class="form-horizontal">
+    <h3>Create a new Statistic</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/Statistics/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for Statistics</h3>
+    <form id="StatisticSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="buzzword" class="col-sm-2 control-label">Buzzword</label>
+        <div class="col-sm-10">
+            <input id="buzzword" name="buzzword" class="form-control" type="text" ng-model="search.buzzword" placeholder="Enter the Statistic Buzzword"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="instanceCount" class="col-sm-2 control-label">Instance Count</label>
+        <div class="col-sm-10">
+            <input id="instanceCount" name="instanceCount" class="form-control" type="text" ng-model="search.instanceCount" placeholder="Enter the Statistic Instance Count"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="frequency" class="col-sm-2 control-label">Frequency</label>
+        <div class="col-sm-10">
+            <input id="frequency" name="frequency" class="form-control" type="text" ng-model="search.frequency" placeholder="Enter the Statistic Frequency"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="density" class="col-sm-2 control-label">Density</label>
+        <div class="col-sm-10">
+            <input id="density" name="density" class="form-control" type="text" ng-model="search.density" placeholder="Enter the Statistic Density"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="history" class="col-sm-2 control-label">History</label>
+        <div class="col-sm-10">
+            <select id="history" name="history" class="form-control" ng-model="search.history" ng-options="h as h.id for h in historyList">
+                <option value="">Choose a History</option>
+            </select>
+        </div>
+    </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Buzzword</th>
+                    <th>Instance Count</th>
+                    <th>Frequency</th>
+                    <th>Density</th>
+                    <th>History</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in filteredResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/Statistics/edit/{{result.id}}">{{result.buzzword}}</a></td>
+                    <td><a href="#/Statistics/edit/{{result.id}}">{{result.instanceCount}}</a></td>
+                    <td><a href="#/Statistics/edit/{{result.id}}">{{result.frequency}}</a></td>
+                    <td><a href="#/Statistics/edit/{{result.id}}">{{result.density}}</a></td>
+                        <td><a href="#/Statistics/edit/{{result.id}}">{{result.history.id}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>

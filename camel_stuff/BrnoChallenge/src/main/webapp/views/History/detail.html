@@ -1,0 +1,33 @@
+<header ng-switch on="$location.path().indexOf('/Histories/new') > -1">
+    <h3 ng-switch-when="true">Create a new History</h3>
+    <h3 ng-switch-when="false">View or edit History</h3>
+</header>
+<form id="HistoryForm" name="HistoryForm" class="form-horizontal" role="form">
+    
+
+    <div class="form-group" ng-class="{'has-error': HistoryForm.timeStamp.$invalid}">
+        <label for="timeStamp" class="col-sm-2 control-label">Time Stamp</label>
+        <div id="timeStampControls" class="col-sm-10">
+            <date id="timeStamp" name="timeStamp" ng-model="history.timeStamp" placeholder="Enter the History Time Stamp"></date>
+            <span class="help-block error" ng-show="HistoryForm.timeStamp.$error.dateFormat">does not match format "yyyy-MM-dd" (e.g. 2013-12-01)</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': HistoryForm.url.$invalid}">
+        <label for="url" class="col-sm-2 control-label">Url</label>
+        <div id="urlControls" class="col-sm-10">
+        <select id="url" name="url" class="form-control" ng-model="urlSelection" ng-options="u.text for u in urlSelectionList"  >
+            <option value="">Choose a Url</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveHistory" name="saveHistory" class="btn btn-primary" ng-disabled="isClean() || HistoryForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteHistory" name="deleteHistory" class="btn btn-danger" ng-show="history.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

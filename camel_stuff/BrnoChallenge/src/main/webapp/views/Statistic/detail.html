@@ -1,0 +1,56 @@
+<header ng-switch on="$location.path().indexOf('/Statistics/new') > -1">
+    <h3 ng-switch-when="true">Create a new Statistic</h3>
+    <h3 ng-switch-when="false">View or edit Statistic</h3>
+</header>
+<form id="StatisticForm" name="StatisticForm" class="form-horizontal" role="form">
+    
+
+    <div class="form-group" ng-class="{'has-error': StatisticForm.buzzword.$invalid}">
+        <label for="buzzword" class="col-sm-2 control-label">Buzzword</label>
+        <div id="buzzwordControls" class="col-sm-10">
+            <input id="buzzword" name="buzzword" type="text" class="form-control" ng-model="statistic.buzzword" placeholder="Enter the Statistic Buzzword"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': StatisticForm.instanceCount.$invalid}">
+        <label for="instanceCount" class="col-sm-2 control-label">Instance Count</label>
+        <div id="instanceCountControls" class="col-sm-10">
+            <input id="instanceCount" name="instanceCount" type="number" class="form-control" ng-model="statistic.instanceCount" placeholder="Enter the Statistic Instance Count"></input>
+            <span class="help-block error" ng-show="StatisticForm.instanceCount.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': StatisticForm.frequency.$invalid}">
+        <label for="frequency" class="col-sm-2 control-label">Frequency</label>
+        <div id="frequencyControls" class="col-sm-10">
+            <input id="frequency" name="frequency" type="number" class="form-control" ng-model="statistic.frequency" placeholder="Enter the Statistic Frequency"></input>
+            <span class="help-block error" ng-show="StatisticForm.frequency.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': StatisticForm.density.$invalid}">
+        <label for="density" class="col-sm-2 control-label">Density</label>
+        <div id="densityControls" class="col-sm-10">
+            <input id="density" name="density" type="number" class="form-control" ng-model="statistic.density" placeholder="Enter the Statistic Density"></input>
+            <span class="help-block error" ng-show="StatisticForm.density.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': StatisticForm.history.$invalid}">
+        <label for="history" class="col-sm-2 control-label">History</label>
+        <div id="historyControls" class="col-sm-10">
+        <select id="history" name="history" class="form-control" ng-model="historySelection" ng-options="h.text for h in historySelectionList"  >
+            <option value="">Choose a History</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveStatistic" name="saveStatistic" class="btn btn-primary" ng-disabled="isClean() || StatisticForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteStatistic" name="deleteStatistic" class="btn btn-danger" ng-show="statistic.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
