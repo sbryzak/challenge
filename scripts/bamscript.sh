@@ -1,5 +1,4 @@
 #!/bin/sh
- ls -1 | grep -v "github" | awk '{ print "rm -rf " $0;}' | sh
 wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip
 unzip wildfly-10.0.0.Final.zip
 wget http://downloads.jboss.org/dashbuilder/release/6.3.0.Final/dashbuilder-6.3.0.Final-wildfly8.war
